@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Expense Tracker</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;        
+      margin: 0;
+      background: #f2f2f2; 
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+      text-align: center;
+      width: 400px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 6px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Expense Tracker</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label>Description:</label>
+    <input type="text" id="desc"><br><br>
+
+    <label>Amount:</label>
+    <input type="number" id="amount"><br><br>
+
+    <label>Date:</label>
+    <input type="date" id="date"><br><br>
+
+    <button onclick="addExpense()">Add Expense</button>
+
+    <h3>Expenses:</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Amount (₹)</th>
+        <th>Date</th>
+      </tr>
+      <tbody id="list"></tbody>
+    </table>
+
+    <h3>Total: ₹ <span id="total">0</span></h3>
+  </div>
+
+  <script>
+    let total = 0;
+
+    function addExpense() {
+      let name = document.getElementById("name").value;
+      let desc = document.getElementById("desc").value;
+      let amt = parseInt(document.getElementById("amount").value);
+      let date = document.getElementById("date").value;
+
+      if (name === "" || desc === "" || isNaN(amt) || date === "") {
+        alert("Please fill all fields!");
+        return;
+      }
+
+      
+      let tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + name + "</td><td>" + desc + "</td><td>" + amt + "</td><td>" + date + "</td>";
+      document.getElementById("list").appendChild(tr);
+
+      
+      total += amt;
+      document.getElementById("total").textContent = total;
+
+      
+      document.getElementById("name").value = "";
+      document.getElementById("desc").value = "";
+      document.getElementById("amount").value = "";
+      document.getElementById("date").value = "";
+    }
+  </script>
+</body>
+</html>
